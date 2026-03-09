@@ -9,7 +9,9 @@ namespace nyilvantartoprogramIKT
 {
     public class Munkalap
     {
-        
+
+        string eszkozNev, hibaLeiras, statusz;
+        int alkatreszekAra, munkadij;
         
 
     }
