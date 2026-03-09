@@ -67,5 +67,10 @@ namespace nyilvantartoprogramIKT
         {
             statusz = "aktuális";
         }
+
+        public override string ToString()
+        {
+            return $"Eszköz neve: {eszkozNev}, Hiba leírása: {hibaLeiras}, Alkatrészek ára: {alkatreszekAra} Ft, Munkadíj: {munkadij} Ft, Státusz: {statusz}";
+        }
     }
 }

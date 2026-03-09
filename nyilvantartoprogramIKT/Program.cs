@@ -6,6 +6,9 @@ namespace nyilvantartoprogramIKT
     {
         static void Main(string[] args)
         {
+
+
+
             //StreamReader sr = new StreamReader("Adatlap.txt");
             bool menuValaszt = false;
             Console.WriteLine("Kérjük válasszon a lenti Menüpontokból!");
@@ -71,3 +74,4 @@ namespace nyilvantartoprogramIKT
         }
     }
 }
+
