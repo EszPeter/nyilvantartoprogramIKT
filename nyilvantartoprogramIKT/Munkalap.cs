@@ -21,5 +21,13 @@ namespace nyilvantartoprogramIKT
             this.alkatreszekAra = alkatreszekAra;
             this.munkadij = munkadij;
         }
+
+        public string EszkozNev { get => eszkozNev; set => eszkozNev = value; }
+        public string HibaLeiras { get => hibaLeiras; set => hibaLeiras = value; }
+        public string Statusz { get => statusz; }
+        public int AlkatreszekAra { get => alkatreszekAra;  }
+        public int Munkadij { get => munkadij; }
+
+
     }
 }
