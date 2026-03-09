@@ -12,7 +12,14 @@ namespace nyilvantartoprogramIKT
 
         string eszkozNev, hibaLeiras, statusz;
         int alkatreszekAra, munkadij;
-        
 
+        public Munkalap(string eszkozNev, string hibaLeiras, int alkatreszekAra, int munkadij,  string statusz="aktuális")
+        {
+            this.eszkozNev = eszkozNev;
+            this.hibaLeiras = hibaLeiras;
+            this.statusz = statusz;
+            this.alkatreszekAra = alkatreszekAra;
+            this.munkadij = munkadij;
+        }
     }
 }
