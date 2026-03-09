@@ -35,7 +35,6 @@ namespace nyilvantartoprogramIKT
                         break;
                     default:
                         Console.WriteLine("Kérjük válasszon a fenti számokból!");
-                        Console.Clear();
                         break;
                 }
             }
