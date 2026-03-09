@@ -51,5 +51,21 @@ namespace nyilvantartoprogramIKT
                 throw new ArgumentException("A munkadíj nem lehet negatív!");
             }
         }
+
+        
+        public void MunkaElvégezve()
+        {
+            statusz = "befejezett";
+        }
+
+        public void MunkaFolyamatban()
+        {
+            statusz = "folyamatban";
+        }
+
+        public void MunkaAktualis()
+        {
+            statusz = "aktuális";
+        }
     }
 }
