@@ -9,7 +9,6 @@ namespace nyilvantartoprogramIKT
 
 
 
-            //StreamReader sr = new StreamReader("Adatlap.txt");
             bool menuValaszt = false;
             Console.WriteLine("Kérjük válasszon a lenti Menüpontokból!");
             Console.WriteLine("----------Üdvözlünk a PC szervizünk nyilvántartó programjában!----------");
@@ -117,8 +116,36 @@ namespace nyilvantartoprogramIKT
                     case '5':
                         Console.Clear();
                         Console.WriteLine("Mentés és kilépés");
-                        //sr.Close();
                         menuValaszt = true;
+
+                        Console.WriteLine("Szeretné-e menteni a munkáját? (i/n) ");
+                        string mentiE = Console.ReadLine();
+
+                        while (mentiE != "i" || mentiE != "n")
+                        {
+                            if (mentiE == "i")
+                            {
+                                StreamWriter sw = new StreamWriter("munkalapok.txt");
+                                for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                                {
+                                    sw.WriteLine(ideiglenesMunkalapok[i]);
+                                }
+                                sw.Close();
+                                ideiglenesMunkalapok.Clear();
+                                break;
+                            }
+                            else if (mentiE == "n")
+                            {
+                                ideiglenesMunkalapok.Clear();
+                                break;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Kérem válasszon a két lehetőség közül!");
+                                Console.Write("Szeretné-e menteni a munkáját? (i/n) ");
+                                mentiE = Console.ReadLine();
+                            }
+                        }
                         break;
                     default:
 
