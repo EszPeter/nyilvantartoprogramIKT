@@ -92,19 +92,25 @@ namespace nyilvantartoprogramIKT
                         }
 
 
-
-                        Console.Write("\nAdja meg a törlendő munkalap sorszámát: ");
-                        int torlesSorszam = Convert.ToInt32(Console.ReadLine());
-                        int torlesIndex = torlesSorszam - 1;
-
-                        if (torlesIndex >= 0 && torlesIndex < ideiglenesMunkalapok.Count)
+                        try
                         {
-                            ideiglenesMunkalapok.RemoveAt(torlesIndex);
-                            Console.WriteLine("Munkalap sikeresen törölve!");
+                            Console.Write("\nAdja meg a törlendő munkalap sorszámát: ");
+                            int torlesSorszam = Convert.ToInt32(Console.ReadLine());
+                            int torlesIndex = torlesSorszam - 1;
+
+                            if (torlesIndex >= 0 && torlesIndex < ideiglenesMunkalapok.Count)
+                            {
+                                ideiglenesMunkalapok.RemoveAt(torlesIndex);
+                                Console.WriteLine("Munkalap sikeresen törölve!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Érvénytelen sorszám!");
+                            }
                         }
-                        else
+                        catch (Exception)
                         {
-                            Console.WriteLine("Érvénytelen sorszám!");
+                            Console.WriteLine("Hiba történt! Csak számot adhat meg a sorszámhoz!");
                         }
                         Console.WriteLine("\nNyomjon meg egy gombot a menübe való visszatéréshez!");
                         break;
