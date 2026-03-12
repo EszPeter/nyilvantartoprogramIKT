@@ -118,7 +118,15 @@ namespace nyilvantartoprogramIKT
                             }
 
                         }
+                        using (StreamWriter sw = new StreamWriter("munkalapok.txt", false))
+                        {
+                            for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                            {
+                                sw.WriteLine($"{ideiglenesMunkalapok[i].EszkozNev};{ideiglenesMunkalapok[i].HibaLeiras};{ideiglenesMunkalapok[i].AlkatreszekAra};{ideiglenesMunkalapok[i].Munkadij};{ideiglenesMunkalapok[i].Statusz}");
+                            }
+                        }
 
+                        Console.WriteLine("\nNyomjon meg bármilyen gombot a kilépéshez!");
                         break;
                     case '2':
                         Console.Clear();
