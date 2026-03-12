@@ -27,17 +27,18 @@ namespace nyilvantartoprogramIKT
                 switch (lenyomottBillentyu)
                 {
                     case '1':
-                       
+
                         break;
                     case '2':
                         Console.Clear();
                         Console.WriteLine("2, Meglévő munkalap módosítása");
 
-                        // Lista megjelenítése, hogy tudjuk mit módosítunk
-                        for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                        try
                         {
-                            Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
-                        }
+                            for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                            {
+                                Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
+                            }
 
 
                             Console.Write("\nAdja meg a módosítandó munkalap sorszámát: ");
@@ -68,8 +69,11 @@ namespace nyilvantartoprogramIKT
                             {
                                 Console.WriteLine("Nincs ilyen sorszámú munkalap!");
                             }
-                        
-
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("Hiba! Kérjük számot adjon meg!");
+                        }
                         Console.WriteLine("Nyomjon meg bármilyen gombot a kilépéshez!");
                         break;
                     case '3':
