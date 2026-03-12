@@ -323,7 +323,7 @@ namespace nyilvantartoprogramIKT
                                 StreamWriter sw = new StreamWriter("munkalapok.txt");
                                 for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
                                 {
-                                    sw.WriteLine(ideiglenesMunkalapok[i]);
+                                    sw.WriteLine($"{ideiglenesMunkalapok[i].EszkozNev};{ideiglenesMunkalapok[i].HibaLeiras};{ideiglenesMunkalapok[i].AlkatreszekAra};{ideiglenesMunkalapok[i].Munkadij};{ideiglenesMunkalapok[i].Statusz}");
                                 }
                                 sw.Close();
                                 ideiglenesMunkalapok.Clear();
