@@ -132,48 +132,76 @@ namespace nyilvantartoprogramIKT
                         Console.Clear();
                         Console.WriteLine("2, Meglévő munkalap módosítása");
 
-                        try
+                        // Lista megjelenítése, hogy tudjuk mit módosítunk
+                        for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
                         {
-                            for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                            Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
+                        }
+
+                        bool amigNemSzam = false;
+                        while (!amigNemSzam)
+                        {
+                            try
                             {
-                                Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
-                            }
+                                Console.Write("\nAdja meg a módosítandó munkalap sorszámát: ");
+                                int sorszam = Convert.ToInt32(Console.ReadLine());
+                                int index = sorszam - 1;
 
-
-                            Console.Write("\nAdja meg a módosítandó munkalap sorszámát: ");
-                            int sorszam = Convert.ToInt32(Console.ReadLine());
-                            int index = sorszam - 1;
-
-                            if (index >= 0 && index < ideiglenesMunkalapok.Count)
-                            {
-                                Console.WriteLine("1 - Alkatrész ár módosítása");
-                                Console.WriteLine("2 - Munkadíj módosítása");
-                                string valasztas = Console.ReadLine();
-
-                                if (valasztas == "1")
+                                if (index >= 0 && index < ideiglenesMunkalapok.Count)
                                 {
-                                    Console.Write("Új ár: ");
-                                    int ujAr = Convert.ToInt32(Console.ReadLine());
-                                    ideiglenesMunkalapok[index].SetAlkatreszekAra(ujAr);
+                                    Console.WriteLine("1 - Alkatrész ár módosítása");
+                                    Console.WriteLine("2 - Munkadíj módosítása");
+                                    Console.WriteLine("3 - Státuszváltoztatás: folyamatban");
+                                    Console.WriteLine("4 - Státuszváltoztatás: befejezve");
+                                    Console.WriteLine("5 - Státuszváltoztatás: aktuális");
+
+                                    string valasztas = Console.ReadLine();
+
+                                    if (valasztas == "1")
+                                    {
+                                        Console.Write("Új ár: ");
+                                        int ujAr = Convert.ToInt32(Console.ReadLine());
+                                        ideiglenesMunkalapok[index].SetAlkatreszekAra(ujAr);
+                                    }
+                                    else if (valasztas == "2")
+                                    {
+                                        Console.Write("Új munkadíj: ");
+                                        int ujMunkadij = Convert.ToInt32(Console.ReadLine());
+                                        ideiglenesMunkalapok[index].SetMunkadij(ujMunkadij);
+                                    }
+                                    else if (valasztas == "3")
+                                    {
+                                        ideiglenesMunkalapok[index].MunkaFolyamatban();
+                                    }
+                                    else if (valasztas == "4")
+                                    {
+                                        ideiglenesMunkalapok[index].MunkaElvégezve();
+                                    }
+                                    else if (valasztas == "5")
+                                    {
+                                        ideiglenesMunkalapok[index].MunkaAktualis();
+                                    }
+                                    Console.WriteLine("Sikeres módosítás!");
+                                    using (StreamWriter sw = new StreamWriter("munkalapok.txt", false))
+                                    {
+                                        for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                                        {
+                                            sw.WriteLine($"{ideiglenesMunkalapok[i].EszkozNev};{ideiglenesMunkalapok[i].HibaLeiras};{ideiglenesMunkalapok[i].AlkatreszekAra};{ideiglenesMunkalapok[i].Munkadij};{ideiglenesMunkalapok[i].Statusz}");
+                                        }
+                                    }
+                                    amigNemSzam = true;
                                 }
-                                else if (valasztas == "2")
+                                else
                                 {
-                                    Console.Write("Új munkadíj: ");
-                                    int ujMunkadij = Convert.ToInt32(Console.ReadLine());
-                                    ideiglenesMunkalapok[index].SetMunkadij(ujMunkadij);
+                                    Console.WriteLine("Nincs ilyen sorszámú munkalap!");
                                 }
-                                Console.WriteLine("Sikeres módosítás!");
                             }
-                            else
+                            catch (Exception)
                             {
-                                Console.WriteLine("Nincs ilyen sorszámú munkalap!");
+                                Console.WriteLine("Hiba! Kérjük számot adjon meg!");
                             }
                         }
-                        catch (Exception)
-                        {
-                            Console.WriteLine("Hiba! Kérjük számot adjon meg!");
-                        }
-                        Console.WriteLine("Nyomjon meg bármilyen gombot a kilépéshez!");
+                        Console.WriteLine("\nNyomjon meg egy gombot a menübe való visszatéréshez!");
                         break;
                     case '3':
                         Console.Clear();
