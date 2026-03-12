@@ -206,8 +206,75 @@ namespace nyilvantartoprogramIKT
                     case '3':
                         Console.Clear();
                         Console.WriteLine("3, Meglévő munkalapok listázása");
+                        bool joBemenetE = false;
+                        bool jobemenetE2 = false;
+                        Console.WriteLine("Mit szeretnél csinálni? ");
+                        Console.WriteLine("1 - összes munkalap listázása ");
+                        Console.WriteLine("2 - név szerinti keresés ");
+                        while (!jobemenetE2)
+                        {
+                            try
+                            {
+                                int muveletNeve = Convert.ToInt32(Console.ReadLine());
+                                while (!joBemenetE)
+                                {
+                                    if (muveletNeve == 1)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Összes munkalap listázása");
+                                        for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                                        {
+                                            Console.WriteLine($"\n{i + 1}. {ideiglenesMunkalapok[i]}");
+                                        }
+                                        joBemenetE = true;
+                                    }
+                                    else if (muveletNeve == 2)
+                                    {
+                                        Console.Clear();
+                                        Console.WriteLine("Név szerinti keresés");
+                                        joBemenetE = true;
 
-                        Console.WriteLine("Nyomjon meg bármilyen gombot a kilépéshez!");
+                                        Console.Write("Kérem adja meg a keresett eszköz nevét: ");
+                                        string keresettEszkozNev = Console.ReadLine();
+
+                                        bool vanEIlyenNev = false;
+                                        while (!vanEIlyenNev)
+                                        {
+                                            for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                                            {
+                                                if (ideiglenesMunkalapok[i].EszkozNev == keresettEszkozNev)
+                                                {
+                                                    Console.WriteLine($"\n{i + 1}. {ideiglenesMunkalapok[i]}");
+                                                    vanEIlyenNev = true;
+                                                }
+                                            }
+                                            if (!vanEIlyenNev)
+                                            {
+                                                Console.WriteLine("Nincs ilyen nevű eszköz a nyilvántartásban! Kérem adja meg újra a keresett eszköz nevét: ");
+                                                keresettEszkozNev = Console.ReadLine();
+                                            }
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Kérjük válasszon a két lehetőség közül!");
+                                        Console.WriteLine("Mit szeretnél csinálni? ");
+                                        Console.WriteLine("1 - összes munkalap listázása ");
+                                        Console.WriteLine("2 - név szerinti keresés ");
+                                        muveletNeve = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                }
+                                jobemenetE2 = true;
+                            }
+                            catch (Exception)
+                            {
+                                Console.WriteLine("Hiba! Kérem számot adjon meg!");
+                                continue;
+                            }
+                        }
+
+                        Console.WriteLine("\nNyomjon meg bármilyen gombot a kilépéshez!");
                         break;
                     case '4':
                         Console.Clear();
