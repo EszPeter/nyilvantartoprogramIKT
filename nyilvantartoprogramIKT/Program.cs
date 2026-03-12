@@ -26,6 +26,98 @@ namespace nyilvantartoprogramIKT
                 switch (lenyomottBillentyu)
                 {
                     case '1':
+                        Console.Clear();
+                        bool befejeztedE = false;
+                        while (!befejeztedE)
+                        {
+                            Console.WriteLine("1, Új munkalap létrehozása");
+
+
+                            Console.Write("Kérem adja meg az eszköz nevét: ");
+                            string eszkozNev = Console.ReadLine();
+
+                            Console.Write("Kérem adja meg az eszköz hibaleírását:");
+                            string hibaLeiras = Console.ReadLine();
+
+                            int alkatreszekAra = 0, munkadij = 0;
+
+                            bool szamTipusE = false;
+                            bool szamTipusE2 = false;
+
+                            while (!szamTipusE)
+                            {
+                                try
+                                {
+
+                                    Console.Write("\nKérem adja meg az alkatrészek együttes összegét!");
+                                    alkatreszekAra = Convert.ToInt32(Console.ReadLine());
+                                    while (alkatreszekAra < 0)
+                                    {
+                                        Console.Write("\nHibás bemenet! Pozitív számot adjon meg!");
+                                        alkatreszekAra = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                    szamTipusE = true;
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("Hibás bemenet! Számot adjon meg!");
+                                }
+                            }
+                            while (!szamTipusE2)
+                            {
+                                try
+                                {
+                                    Console.Write("\nKérem adja meg a munkadíj összegét!");
+                                    munkadij = Convert.ToInt32(Console.ReadLine());
+                                    while (munkadij < 0)
+                                    {
+                                        Console.Write("\nHibás bemenet! Pozitív számot adjon meg!");
+                                        munkadij = Convert.ToInt32(Console.ReadLine());
+                                    }
+                                    szamTipusE2 = true;
+                                }
+                                catch (FormatException)
+                                {
+                                    Console.WriteLine("Hibás bemenet! Számot adjon meg!");
+                                }
+                            }
+
+
+                            Munkalap ujMunkalap = new Munkalap(eszkozNev, hibaLeiras, alkatreszekAra, munkadij);
+                            ideiglenesMunkalapok.Add(ujMunkalap);
+
+                            Console.Write("Szeretne még egy munkalapot létrehozni? (i/n) ");
+                            string valasz = Console.ReadLine();
+                            if (valasz == "i")
+                            {
+                                continue;
+                            }
+                            else if (valasz == "n")
+                            {
+                                befejeztedE = true;
+                            }
+                            else
+                            {
+                                Console.WriteLine("Kérem válasszon a két lehetőség közül!");
+                                Console.WriteLine("Szeretne még egy munkalapot létrehozni? (i/n)");
+                                valasz = Console.ReadLine();
+                                while (valasz != "i" && valasz != "n")
+                                {
+                                    Console.WriteLine("Kérem válasszon a két lehetőség közül!");
+                                    Console.WriteLine("Szeretne még egy munkalapot létrehozni? (i/n)");
+                                    valasz = Console.ReadLine();
+                                }
+                                if (valasz == "i")
+                                {
+                                    continue;
+                                }
+                                else if (valasz == "n")
+                                {
+                                    befejeztedE = true;
+                                }
+                            }
+
+                        }
 
                         break;
                     case '2':
