@@ -19,6 +19,7 @@ namespace nyilvantartoprogramIKT
             Console.WriteLine($"4, Meglévő munkalap törlése");
             Console.WriteLine($"5, Mentés és kilépés");
             Console.WriteLine("------------------------------------------------------------------------");
+            List<Munkalap> ideiglenesMunkalapok = new List<Munkalap>();
             while (!menuValaszt)
             {
                 ConsoleKeyInfo kivalasztottBillentyu = Console.ReadKey(true);
@@ -26,14 +27,48 @@ namespace nyilvantartoprogramIKT
                 switch (lenyomottBillentyu)
                 {
                     case '1':
-                        Console.Clear();
-                        Console.WriteLine("1, Új munkalap létrehozása");
-
-                        Console.WriteLine("Nyomjon meg bármilyen gombot a kilépéshez!");
+                       
                         break;
                     case '2':
                         Console.Clear();
                         Console.WriteLine("2, Meglévő munkalap módosítása");
+
+                        // Lista megjelenítése, hogy tudjuk mit módosítunk
+                        for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                        {
+                            Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
+                        }
+
+
+                            Console.Write("\nAdja meg a módosítandó munkalap sorszámát: ");
+                            int sorszam = Convert.ToInt32(Console.ReadLine());
+                            int index = sorszam - 1;
+
+                            if (index >= 0 && index < ideiglenesMunkalapok.Count)
+                            {
+                                Console.WriteLine("1 - Alkatrész ár módosítása");
+                                Console.WriteLine("2 - Munkadíj módosítása");
+                                string valasztas = Console.ReadLine();
+
+                                if (valasztas == "1")
+                                {
+                                    Console.Write("Új ár: ");
+                                    int ujAr = Convert.ToInt32(Console.ReadLine());
+                                    ideiglenesMunkalapok[index].SetAlkatreszekAra(ujAr);
+                                }
+                                else if (valasztas == "2")
+                                {
+                                    Console.Write("Új munkadíj: ");
+                                    int ujMunkadij = Convert.ToInt32(Console.ReadLine());
+                                    ideiglenesMunkalapok[index].SetMunkadij(ujMunkadij);
+                                }
+                                Console.WriteLine("Sikeres módosítás!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Nincs ilyen sorszámú munkalap!");
+                            }
+                        
 
                         Console.WriteLine("Nyomjon meg bármilyen gombot a kilépéshez!");
                         break;
