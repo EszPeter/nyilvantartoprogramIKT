@@ -1,14 +1,11 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using nyilvantartoprogramIKT;
 
-namespace nyilvantartoprogramIKT
+namespace ConsoleApp3
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-
-
-
             bool menuValaszt = false;
             Console.WriteLine("Kérjük válasszon a lenti Menüpontokból!");
             Console.WriteLine("----------Üdvözlünk a PC szervizünk nyilvántartó programjában!----------");
@@ -18,9 +15,34 @@ namespace nyilvantartoprogramIKT
             Console.WriteLine($"4, Meglévő munkalap törlése");
             Console.WriteLine($"5, Mentés és kilépés");
             Console.WriteLine("------------------------------------------------------------------------");
+
+
             List<Munkalap> ideiglenesMunkalapok = new List<Munkalap>();
             while (!menuValaszt)
             {
+
+                try
+                {
+
+                    StreamReader sr = new StreamReader("munkalapok.txt");
+                    ideiglenesMunkalapok.Clear();
+                    while (!sr.EndOfStream)
+                    {
+                        string sor = sr.ReadLine();
+                        string[] adatok = sor.Split(';');
+                        Munkalap beolvasottMunkalap = new Munkalap(adatok[0], adatok[1], Convert.ToInt32(adatok[2]), Convert.ToInt32(adatok[3]), adatok[4]);
+                        ideiglenesMunkalapok.Add(beolvasottMunkalap);
+                    }
+                    sr.Close();
+                }
+                catch (FileNotFoundException)
+                {
+                    if (ideiglenesMunkalapok.Count == 0)
+                    {
+                        Console.WriteLine("Nincs mentett munkalap! Kérem hozzon létre egy új munkalapot!");
+                    }
+                }
+
                 ConsoleKeyInfo kivalasztottBillentyu = Console.ReadKey(true);
                 char lenyomottBillentyu = kivalasztottBillentyu.KeyChar;
                 switch (lenyomottBillentyu)
@@ -161,12 +183,22 @@ namespace nyilvantartoprogramIKT
                                     {
                                         Console.Write("Új ár: ");
                                         int ujAr = Convert.ToInt32(Console.ReadLine());
+                                        if (ujAr < 0)
+                                        {
+                                            Console.WriteLine("Hibás bemenet! Pozitív számot adjon meg!");
+                                            continue;
+                                        }
                                         ideiglenesMunkalapok[index].SetAlkatreszekAra(ujAr);
                                     }
                                     else if (valasztas == "2")
                                     {
                                         Console.Write("Új munkadíj: ");
                                         int ujMunkadij = Convert.ToInt32(Console.ReadLine());
+                                        if (ujMunkadij < 0)
+                                        {
+                                            Console.WriteLine("Hibás bemenet! Pozitív számot adjon meg!");
+                                            continue;
+                                        }
                                         ideiglenesMunkalapok[index].SetMunkadij(ujMunkadij);
                                     }
                                     else if (valasztas == "3")
@@ -180,6 +212,11 @@ namespace nyilvantartoprogramIKT
                                     else if (valasztas == "5")
                                     {
                                         ideiglenesMunkalapok[index].MunkaAktualis();
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Kérem válasszon a megadott lehetőségek közül!");
+                                        continue;
                                     }
                                     Console.WriteLine("Sikeres módosítás!");
                                     using (StreamWriter sw = new StreamWriter("munkalapok.txt", false))
@@ -285,7 +322,6 @@ namespace nyilvantartoprogramIKT
                             Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i]}");
                         }
 
-
                         try
                         {
                             Console.Write("\nAdja meg a törlendő munkalap sorszámát: ");
@@ -296,6 +332,13 @@ namespace nyilvantartoprogramIKT
                             {
                                 ideiglenesMunkalapok.RemoveAt(torlesIndex);
                                 Console.WriteLine("Munkalap sikeresen törölve!");
+                                using (StreamWriter sw = new StreamWriter("munkalapok.txt", false))
+                                {
+                                    for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
+                                    {
+                                        sw.WriteLine($"{ideiglenesMunkalapok[i].EszkozNev};{ideiglenesMunkalapok[i].HibaLeiras};{ideiglenesMunkalapok[i].AlkatreszekAra};{ideiglenesMunkalapok[i].Munkadij};{ideiglenesMunkalapok[i].Statusz}");
+                                    }
+                                }
                             }
                             else
                             {
@@ -361,4 +404,3 @@ namespace nyilvantartoprogramIKT
         }
     }
 }
-
