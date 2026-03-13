@@ -19,7 +19,7 @@ namespace ConsoleApp3
 
             List<Munkalap> ideiglenesMunkalapok = new List<Munkalap>();
             while (!menuValaszt)
-            {
+            { //Tas munkája
 
                 try
                 {
@@ -47,7 +47,7 @@ namespace ConsoleApp3
                 char lenyomottBillentyu = kivalasztottBillentyu.KeyChar;
                 switch (lenyomottBillentyu)
                 {
-                    case '1':
+                    case '1': //Szatmári munkája
                         Console.Clear();
                         bool befejeztedE = false;
                         while (!befejeztedE)
@@ -150,11 +150,10 @@ namespace ConsoleApp3
 
                         Console.WriteLine("\nNyomjon meg bármilyen gombot a kilépéshez!");
                         break;
-                    case '2':
+                    case '2': //Tas Munkája
                         Console.Clear();
                         Console.WriteLine("2, Meglévő munkalap módosítása");
 
-                        // Lista megjelenítése, hogy tudjuk mit módosítunk
                         for (int i = 0; i < ideiglenesMunkalapok.Count; i++)
                         {
                             Console.WriteLine($"{i + 1}. {ideiglenesMunkalapok[i].EszkozNev}");
@@ -240,7 +239,7 @@ namespace ConsoleApp3
                         }
                         Console.WriteLine("\nNyomjon meg egy gombot a menübe való visszatéréshez!");
                         break;
-                    case '3':
+                    case '3': //Szatmári munkája
                         Console.Clear();
                         Console.WriteLine("3, Meglévő munkalapok listázása");
                         bool joBemenetE = false;
@@ -313,7 +312,7 @@ namespace ConsoleApp3
 
                         Console.WriteLine("\nNyomjon meg bármilyen gombot a kilépéshez!");
                         break;
-                    case '4':
+                    case '4': //Tas munkája
                         Console.Clear();
                         Console.WriteLine("4, Meglévő munkalap törlése");
 
@@ -351,7 +350,7 @@ namespace ConsoleApp3
                         }
                         Console.WriteLine("\nNyomjon meg egy gombot a menübe való visszatéréshez!");
                         break;
-                    case '5':
+                    case '5': //Közös munka
                         Console.Clear();
                         Console.WriteLine("Mentés és kilépés");
                         menuValaszt = true;
@@ -386,7 +385,7 @@ namespace ConsoleApp3
                         }
                         break;
                     default:
-
+                        
                         Console.WriteLine("Kérjük válasszon a fenti számokból!");
 
                         Console.Clear();
